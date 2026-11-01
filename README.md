@@ -1,8 +1,10 @@
 # Strokio
 
-Strokio is an experiment in making drawing practice consistent
-and progress visible. Its long-term loop is: set a goal, practice from a
-focused prompt, submit a drawing, receive critique, and track skill progress.
+Strokio helps a person assess their drawing skills, track meaningful
+progression, and enjoy a sustainable drawing practice. Its long-term loop is:
+set a goal, practice from a focused prompt, submit a drawing, receive critique,
+and track skill progress. User customization and personalization are planned as
+a v2 direction beyond the initial single-user experiment.
 
 The repository currently contains a **client-side prototype** for the learning
 flow. The first product experiment is planned as a **single-user, no-auth v1**;
@@ -56,17 +58,18 @@ pnpm audit
 
 There is no automated test suite configured yet. ESLint runs through the CLI;
 Next.js 16 no longer provides `next lint`. See `package.json` for script
-definitions. Lint currently reports three existing synchronous state-in-effect
+definitions. Lint currently reports two existing synchronous state-in-effect
 warnings and one image-element warning; these remain visible for follow-up work.
 
 ## Repository guide
 
 | Path | Purpose |
 |---|---|
-| `app/` | Next.js routes and app-wide styles |
-| `components/` | Prototype screens and UI components |
-| `data/` | Static exercise catalog |
-| `lib/` | Browser storage and mock feedback helpers |
+| `src/app/` | Next.js routes, layouts, global styles, and route-level screen composition |
+| `src/domains/practice/` | Practice exercise model, static exercise catalog, and `ExerciseCard` |
+| `src/domains/assessment/` | Drawing submission uploader and prototype mock feedback model/display |
+| `src/domains/progress/` | Progress and streak model, `ProgressTracker`, and browser `localStorage` adapter |
+| `src/application/` | Cross-domain workflows coordinating practice, assessment, and progress |
 | `docs/SPEC.md` | Current system and implementation status |
 | `docs/LEAN_PLAN.md` | Focused v1 experiment plan |
 | `docs/strokio-full-vision.md` | Long-term product vision |
@@ -81,4 +84,3 @@ Read [`AGENTS.md`](AGENTS.md) and [`docs/specs/README.md`](docs/specs/README.md)
 before starting work. The initial repository and agent setup stays on its
 current branch; subsequent product features use their own accepted spec and
 feature branch.
-# strokio

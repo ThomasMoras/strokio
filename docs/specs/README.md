@@ -6,6 +6,8 @@ is tracked in [`0001-project-setup.md`](0001-project-setup.md).
 The accepted toolchain migration is tracked in
 [`0002-stable-toolchain-pnpm.md`](0002-stable-toolchain-pnpm.md).
 The Strokio rebrand is tracked in [`0003-rebrand-strokio.md`](0003-rebrand-strokio.md).
+The modular `src/` architecture refactor is tracked in
+[`0004-architecture-foundation.md`](0004-architecture-foundation.md).
 
 Lifecycle: `draft` → `accepted` (human sign-off; implementation starts only on
 `accepted`) → `in-progress` → `shipped`. On `shipped`, fold the result into

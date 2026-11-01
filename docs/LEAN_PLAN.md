@@ -53,15 +53,17 @@ remain future work.
 
 - **Application:** Next.js App Router, TypeScript, Tailwind; route handlers for
   application APIs.
-- **Database:** PostgreSQL with one ORM selected in an accepted implementation
-  spec (shared stack currently recommends Drizzle; Prisma remains an option).
+- **Database:** PostgreSQL with Drizzle ORM (see [`adr/0003-v1-persistence-and-llm-agnostic-review.md`](adr/0003-v1-persistence-and-llm-agnostic-review.md)).
 - **Image storage:** local storage for the single-user experiment. Keep the
   storage interface replaceable for later S3-compatible storage.
-- **AI:** direct TypeScript Anthropic SDK call for the single vision review,
-  returning schema-validated structured output. No Python service in v1.
+- **AI:** provider-agnostic TypeScript `VisionReviewProvider` port supporting
+  free-first vision providers (Google Gemini Free Tier, OpenRouter free vision
+  models, and local Ollama vision models) before any paid provider, returning
+  Zod-validated structured output. No Python service in v1.
 - **Background work:** use a PostgreSQL-backed `jobs` table for asynchronous
-  reviews, following the shared stack's `FOR UPDATE SKIP LOCKED` worker
-  convention. Keep the queue implementation in TypeScript for v1.
+  reviews (auto-queued on drawing upload), following the shared stack's
+  `FOR UPDATE SKIP LOCKED` worker convention. Keep the queue implementation in
+  TypeScript for v1.
 - **Tests:** Vitest for unit/integration tests and Playwright for essential
   user flows, introduced when the corresponding feature is implemented.
 

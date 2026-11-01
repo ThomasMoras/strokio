@@ -1,8 +1,8 @@
 # 0004 — Establish a maintainable application architecture
 
-- Status: draft
+- Status: shipped
 - Contract impact: none
-- Touches: `app/**`, `components/**`, `data/**`, `lib/**`, `src/**`, `tsconfig.json`, `README.md`, `docs/SPEC.md`, `CHANGELOG.md`
+- Touches: `app/**`, `components/**`, `data/**`, `lib/**`, `src/**`, `tsconfig.json`, `AGENTS.md`, `opencode.json`, `README.md`, `docs/SPEC.md`, `CHANGELOG.md`
 
 ## Goal
 
@@ -144,9 +144,8 @@ build.
 
 ## Open questions
 
-- Does the proposed `src/app`, `src/domains`, `src/application`, and
-  `src/shared` structure and the business-domain boundaries match
-  the intended architecture? This spec must be accepted before implementation.
+None. The proposed `src/app`, `src/domains`, `src/application`, and `src/shared`
+structure and business-domain boundaries are accepted.
 
 ## Task breakdown (for agents)
 

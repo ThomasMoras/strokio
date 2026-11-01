@@ -18,7 +18,7 @@ technical conventions in `docs/STACK.md`.
 
 | Path | Agent access |
 |---|---|
-| `app/**`, `components/**`, `data/**`, `lib/**` | Read/write for accepted feature work |
+| `src/**` | Read/write for accepted feature work |
 | `docs/specs/**`, `docs/adr/**` | Read/write for drafting and recording decisions |
 | `docs/**` | Read/write for documentation work in the accepted scope |
 | `opencode.json`, `.github/**`, `AGENTS.md` | Read/write when agent setup or guardrails are in scope |

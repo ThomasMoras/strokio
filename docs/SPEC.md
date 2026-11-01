@@ -10,9 +10,11 @@ features will be scoped in `docs/specs/` and implemented on separate branches.
 
 ## 1. Product goal
 
-Help a person make drawing practice regular and see progress toward a concrete
-drawing goal. The intended long-term loop is goal setting, daily practice,
-drawing submission, critique, and skill progress.
+Help a person assess their drawing skills, track meaningful progression, and
+enjoy a sustainable drawing practice. The intended long-term loop is goal
+setting, daily practice, drawing submission, critique, and skill progress.
+Personalization and user customization are a v2 direction outside the initial
+single-user v1 experiment.
 
 ## 2. Current implementation
 
@@ -45,15 +47,17 @@ fine-tuning are outside the planned v1 scope.
 ## 4. Repository layout
 
 ```text
-app/                         Next.js routes and global styles
-components/                  Prototype UI components
-data/exercises.ts            Static 12-exercise catalog
-lib/                         Browser persistence and mock feedback
+src/
+  app/                       Next.js routes, layouts, global styles, and screen composition
+  domains/
+    practice/                Exercise domain model, static 12-exercise catalog, and ExerciseCard
+    assessment/              ImageUploader and prototype mock-feedback model and display
+    progress/                Progress/streak model, ProgressTracker, and browser localStorage adapter
+  application/               Cross-domain workflows coordinating practice, assessment, and progress
 docs/SPEC.md                 Current implementation (this document)
 docs/LEAN_PLAN.md            Focused v1 experiment
-docs/strokio-full-vision.md    Long-term product vision
+docs/strokio-full-vision.md  Long-term product vision
 docs/STACK.md                Shared technical conventions and v1 direction
-docs/iterations/             Setup and feature iteration scope
 docs/specs/                  Proposed and accepted work specs
 docs/adr/                    Durable technical decisions
 AGENTS.md                    Agent workflow and conventions
@@ -63,10 +67,12 @@ opencode.json                OpenCode project permissions
 ## 5. Data and interfaces
 
 The prototype has no server data model. Browser state is held under the
-`strokio-progress` and `strokio-streak` localStorage keys. On first read, prior
+`strokio-progress` and `strokio-streak` localStorage keys in
+`src/domains/progress/infrastructure/browser-storage.ts`. On first read, prior
 values under the `drawing-platform-progress` and `drawing-platform-streak` keys
 are copied forward and retained.
-Exercise definitions are static TypeScript data in `data/exercises.ts`.
+Exercise definitions are static TypeScript data in
+`src/domains/practice/data/exercises.ts`.
 
 There is no formal, versioned external API or shared contract in the current
 application. A future feature spec must define any API boundary it introduces
@@ -80,9 +86,10 @@ does not call external services. The runtime is Node.js 26.13.0 LTS, with pnpm
 12.16.1 as the package manager. Local development uses `pnpm dev`; no
 deployment target is selected or documented as implemented.
 
-The planned v1 uses PostgreSQL, local image storage, and Anthropic vision review
-as the technical direction. The concrete model, review trigger, cost limits,
-and deployment choices remain feature-spec decisions until accepted.
+The planned v1 uses PostgreSQL with Drizzle ORM, local image storage, and an
+LLM-agnostic, free-first vision review pipeline as the technical direction. The
+concrete upload limits and deployment choices remain feature-spec decisions
+until accepted.
 
 ## 7. Work status
 
@@ -91,14 +98,14 @@ and deployment choices remain feature-spec decisions until accepted.
 | [0001](specs/0001-project-setup.md) | Project documentation and agent setup | shipped |
 | [0002](specs/0002-stable-toolchain-pnpm.md) | Stable toolchain and pnpm migration | shipped |
 | [0003](specs/0003-rebrand-strokio.md) | Strokio rebrand | shipped |
+| [0004](specs/0004-architecture-foundation.md) | Domain-driven `src/` application architecture | shipped |
 | Product v1 | Defined by `LEAN_PLAN.md`; implementation not started | planned |
 
 Spec lifecycle: `draft` → `accepted` → `in-progress` → `shipped`.
 
 ## 8. Open items
 
-- Select the concrete database library (Drizzle or Prisma) for v1.
-- Decide review trigger, concrete model, and review-cost budget.
-- Specify v1 upload format/size limits and local storage lifecycle.
-- Decide the exact single-user goal and skill taxonomy for the first experiment.
+- Finalize the concrete Drizzle schema and local upload storage lifecycle in Spec 0005.
+- Configure the default free vision provider/model (e.g., Gemini Free Tier, OpenRouter Free, or local Ollama) and daily review cap in Spec 0007.
+- Specify v1 upload format/size limits and timezone/backfill rules in their respective feature specs.
 - Select a deployment target when deployment work is in scope.

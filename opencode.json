@@ -12,10 +12,7 @@
     },
     "edit": {
       "*": "ask",
-      "app/**": "allow",
-      "components/**": "allow",
-      "data/**": "allow",
-      "lib/**": "allow",
+      "src/**": "allow",
       "docs/**": "allow",
       "AGENTS.md": "allow",
       "README.md": "allow"
